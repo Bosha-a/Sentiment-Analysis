@@ -41,7 +41,7 @@ with open('svc.pkl', 'rb') as file:
 title = st.title('Welcome to Your Sentiment Analysis Application')
 
 text = st.text_input('Enter your text here:')
-text = text_preprocessing(text)
+new_text = text_preprocessing(text)
 
 
 button = st.button('Predict')
@@ -49,7 +49,7 @@ button = st.button('Predict')
 dict = {1 : 'Positive', 0 : 'Negative'}
 
 if button:
-    prediction = model.predict([text])[0]
+    prediction = model.predict([new_text])[0]
     sentiment = dict[prediction]
     st.write(sentiment)
     
