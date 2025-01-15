@@ -1,6 +1,6 @@
 import streamlit as st 
 import pickle as pkl 
-from nltk import word_tokenize
+import nltk
 import re
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
@@ -22,7 +22,7 @@ def text_preprocessing(text):
   ## special charcter
   text = re.sub('[^a-zA-z]', ' ', text)
   ## Tokinzation
-  text = word_tokenize(text)
+  text = nltk.word_tokenize(text)
   ## stopwords
   text = [word for word in text if word not in stop_words]
   ## lemmetization
