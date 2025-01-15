@@ -1,6 +1,6 @@
 import streamlit as st 
 import pickle as pkl 
-from nltk.tokenize import word_tokenize
+from nltk import word_tokenize
 import re
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
