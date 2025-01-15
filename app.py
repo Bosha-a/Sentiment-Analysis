@@ -1,14 +1,14 @@
 import streamlit as st 
 import pickle as pkl 
-import nltk
+from nltk import word_tokenize 
 import re
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pickle as pkl 
 
-nltk.download('punkt') 
-nltk.download('stopwords')
+# nltk.download('punkt') 
+# nltk.download('stopwords')
 
 with open('tf.pkl', 'rb') as file:
     model = pkl.load(file)
@@ -24,7 +24,7 @@ def text_preprocessing(text):
   ## special charcter
   text = re.sub('[^a-zA-z]', ' ', text)
   ## Tokinzation
-  text = nltk.word_tokenize(text)
+  text = word_tokenize(text)
   ## stopwords
   text = [word for word in text if word not in stop_words]
   ## lemmetization
