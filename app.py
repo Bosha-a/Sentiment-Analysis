@@ -1,55 +1,64 @@
-import streamlit as st 
-import pickle as pkl 
-from nltk import word_tokenize 
-import nltk   
+import streamlit as st
+import pickle as pkl
+from nltk import word_tokenize
+import nltk
 import re
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
-import pickle as pkl 
 
-nltk.download('punkt') 
+# Download necessary NLTK resources
+nltk.download('punkt')
+nltk.download('stopwords')
 
-
+# Load pre-trained models
 with open('tf.pkl', 'rb') as file:
-    model = pkl.load(file)
-
+    tf = pkl.load(file)
 
 with open('svc.pkl', 'rb') as file:
     model = pkl.load(file)
 
-# tf = TfidfVectorizer()
+# Initialize stopwords and stemmer
 stop_words = stopwords.words('english')
 stemmer = PorterStemmer()
 
-
+# Function for text preprocessing
 def text_preprocessing(text):
-  ## lower case
-  text = text.lower()
-  ## special charcter
-  text = re.sub('[^a-zA-z]', ' ', text)
-  ## Tokinzation
-  text = word_tokenize(text)
-  ## stopwords
-  text = [word for word in text if word not in stop_words]
-  ## lemmetization
-  text = [stemmer.stem(word) for word in text]
-  text = ' '.join(text)
-  text = model.transform([text])
-  return text
+    # Lower case
+    text = text.lower()
+    # Remove special characters
+    text = re.sub('[^a-zA-Z]', ' ', text)
+    # Tokenization
+    text = word_tokenize(text)
+    # Remove stopwords
+    text = [word for word in text if word not in stop_words]
+    # Stemming
+    text = [stemmer.stem(word) for word in text]
+    # Join words back into a single string
+    text = ' '.join(text)
+    # Apply TF-IDF transformation
+    text = tf.transform([text])
+    return text
 
-title = st.title('Welcome to Your Sentiment Analysis Application')
+# Streamlit app interface
+st.title('Welcome to Your Sentiment Analysis Application')
 
 text = st.text_input('Enter your text here:')
-new_text = text_preprocessing(text)
 
+# Handle empty input
+if not text:
+    st.write("Please enter some text for analysis.")
+else:
+    # Preprocess the input text
+    processed_text = text_preprocessing(text)
 
-button = st.button('Predict')
+    # Prediction button
+    button = st.button('Predict')
 
-dict = {1 : 'Positive', 0 : 'Negative'}
+    sentiment_dict = {1: 'Positive', 0: 'Negative'}
 
-if button:
-    prediction = model.predict([new_text])[0]
-    sentiment = dict[prediction]
-    st.write(sentiment)
-    
+    if button:
+        # Make prediction and display result
+        prediction = model.predict(processed_text)[0]
+        sentiment = sentiment_dict[prediction]
+        st.write(f"Sentiment: {sentiment}")
