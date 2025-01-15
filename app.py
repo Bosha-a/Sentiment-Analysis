@@ -14,7 +14,11 @@ nltk.download('punkt')
 with open('tf.pkl', 'rb') as file:
     model = pkl.load(file)
 
-tf = TfidfVectorizer()
+
+with open('svc.pkl', 'rb') as file:
+    model = pkl.load(file)
+
+# tf = TfidfVectorizer()
 stop_words = stopwords.words('english')
 stemmer = PorterStemmer()
 
@@ -33,10 +37,6 @@ def text_preprocessing(text):
   text = ' '.join(text)
   text = model.transform([text])
   return text
-
-
-with open('svc.pkl', 'rb') as file:
-    model = pkl.load(file)
 
 title = st.title('Welcome to Your Sentiment Analysis Application')
 
