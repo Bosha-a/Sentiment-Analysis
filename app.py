@@ -7,6 +7,8 @@ from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pickle as pkl 
 
+nltk.download('punkt') 
+nltk.download('stopwords')
 
 with open('tf.pkl', 'rb') as file:
     model = pkl.load(file)
