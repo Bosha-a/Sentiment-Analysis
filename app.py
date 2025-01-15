@@ -1,14 +1,15 @@
 import streamlit as st 
 import pickle as pkl 
 from nltk import word_tokenize 
+import nltk   
 import re
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pickle as pkl 
 
-# nltk.download('punkt') 
-# nltk.download('stopwords')
+nltk.download('punkt') 
+nltk.download('stopwords')
 
 with open('tf.pkl', 'rb') as file:
     model = pkl.load(file)
