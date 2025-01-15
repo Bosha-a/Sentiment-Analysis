@@ -49,7 +49,7 @@ button = st.button('Predict')
 dict = {1 : 'Positive', 0 : 'Negative'}
 
 if button:
-    prediction = model.predict(text)[0]
+    prediction = model.predict([text])[0]
     sentiment = dict[prediction]
     st.write(sentiment)
     
