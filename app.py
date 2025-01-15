@@ -1,6 +1,5 @@
 import streamlit as st 
 import pickle as pkl 
-import nltk
 from nltk.tokenize import word_tokenize
 import re
 from nltk.stem import PorterStemmer
@@ -15,7 +14,6 @@ with open('tf.pkl', 'rb') as file:
 tf = TfidfVectorizer()
 stop_words = stopwords.words('english')
 stemmer = PorterStemmer()
-nltk.download('punkt')
 
 
 def text_preprocessing(text):
