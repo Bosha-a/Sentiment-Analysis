@@ -36,6 +36,7 @@ def text_preprocessing(text):
 st.title('Sentiment Analysis Application')
 
 text = st.text_input('Enter your text here:')
+sentiment_dict = {1: 'Positive', 0: 'Negative'}
 
 # Prediction button
 if st.button('Predict'):
