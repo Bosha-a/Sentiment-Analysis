@@ -1,15 +1,14 @@
 import streamlit as st
 import pickle as pkl
-from nltk import word_tokenize
+from nltk.tokenize import word_tokenize
 import nltk
 import re
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 
 # Download necessary NLTK resources
-nltk.download('punkt')
+nltk.download('punkt')  # Fix for the error
 nltk.download('stopwords')
-nltk.download('punkt_tab')
 
 # Load pre-trained models
 with open('tf.pkl', 'rb') as file:
@@ -37,7 +36,6 @@ def text_preprocessing(text):
 st.title('Sentiment Analysis Application')
 
 text = st.text_input('Enter your text here:')
-sentiment_dict = {1: 'Positive', 0: 'Negative'}
 
 # Prediction button
 if st.button('Predict'):
