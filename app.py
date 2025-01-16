@@ -9,6 +9,7 @@ from nltk.corpus import stopwords
 # Download necessary NLTK resources
 nltk.download('punkt')
 nltk.download('stopwords')
+nltk.download('punkt_tab')
 
 # Load pre-trained models
 with open('tf.pkl', 'rb') as file:
