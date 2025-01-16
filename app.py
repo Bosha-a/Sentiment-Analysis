@@ -44,14 +44,14 @@ def text_preprocessing(text):
 # Streamlit app interface
 st.title('Welcome to Your Sentiment Analysis Application')
 
-text_inp = st.text_input('Enter your text here:')
+text = st.text_input('Enter your text here:')
 
 # Handle empty input
-if not text_inp:
+if not text:
     st.write("Please enter some text for analysis.")
 else:
     # Preprocess the input text
-    processed_text = text_preprocessing(text_inp)
+    processed_text = text_preprocessing(text)
 
     # Prediction button
     button = st.button('Predict')
