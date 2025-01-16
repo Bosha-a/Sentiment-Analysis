@@ -7,7 +7,7 @@ from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 
 # Download necessary NLTK resources
-nltk.download('punkt')  # Fix for the error
+nltk.download('punkt_tab')  # Fix for the error
 nltk.download('stopwords')
 
 # Load pre-trained models
