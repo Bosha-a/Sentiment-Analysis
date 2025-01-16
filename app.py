@@ -10,7 +10,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 # Download necessary NLTK resources
 nltk.download('punkt')
 nltk.download('stopwords')
-tf = TfidfVectorizer()
+# tf = TfidfVectorizer()
 
 # Load pre-trained models
 with open('tf.pkl', 'rb') as file:
@@ -45,14 +45,12 @@ def text_preprocessing(text):
 st.title('Welcome to Your Sentiment Analysis Application')
 
 text = st.text_input('Enter your text here:')
+processed_text = text_preprocessing(text)
 
 # Handle empty input
 if not text:
     st.write("Please enter some text for analysis.")
 else:
-    # Preprocess the input text
-    processed_text = text_preprocessing(text)
-
     # Prediction button
     button = st.button('Predict')
 

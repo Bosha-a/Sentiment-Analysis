@@ -9,7 +9,7 @@ import pickle as pkl
 with open('tf.pkl', 'rb') as file:
     model = pkl.load(file)
 
-tf = TfidfVectorizer()
+# tf = TfidfVectorizer()
 stop_words = stopwords.words('english')
 stemmer = PorterStemmer()
 
@@ -47,5 +47,5 @@ def text_preprocessing(text):
     text = model.transform([text])
     return text
 
-new_text = text_preprocessing("love you")
+new_text = text_preprocessing("love you more one ")
 print(new_text)
