@@ -38,7 +38,7 @@ def text_preprocessing(text):
     # Join words back into a single string
     text = ' '.join(text)
     # Apply TF-IDF transformation
-    text = model.transform([text])
+    text = tf.transform([text])
     return text
 
 # Streamlit app interface
@@ -48,16 +48,16 @@ text = st.text_input('Enter your text here:')
 processed_text = text_preprocessing(text)
 
 # Handle empty input
-if not text:
-    st.write("Please enter some text for analysis.")
-else:
-    # Prediction button
-    button = st.button('Predict')
+# if not text:
+#     st.write("Please enter some text for analysis.")
+# else:
+#     # Prediction button
+#     button = st.button('Predict')
 
-    sentiment_dict = {1: 'Positive', 0: 'Negative'}
+sentiment_dict = {1: 'Positive', 0: 'Negative'}
 
-    if button:
+#     if button:
         # Make prediction and display result
-        prediction = model.predict(processed_text)[0]
-        sentiment = sentiment_dict[prediction]
-        st.write(f"Sentiment: {sentiment}")
+prediction = model.predict(processed_text)[0]
+sentiment = sentiment_dict[prediction]
+st.write(f"Sentiment: {sentiment}")
