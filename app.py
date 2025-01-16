@@ -1,14 +1,10 @@
 import streamlit as st
 import pickle as pkl
-from nltk.tokenize import word_tokenize
-import nltk
+import spacy
 import re
-from nltk.stem import PorterStemmer
-from nltk.corpus import stopwords
 
-# Download necessary NLTK resources
-nltk.download('punkt')  # Fix for the error
-nltk.download('stopwords')
+# Load spaCy English model
+nlp = spacy.load("en_core_web_sm")
 
 # Load pre-trained models
 with open('tf.pkl', 'rb') as file:
@@ -17,18 +13,22 @@ with open('tf.pkl', 'rb') as file:
 with open('svc.pkl', 'rb') as file:
     model = pkl.load(file)
 
-# Initialize stopwords and stemmer
-stop_words = stopwords.words('english')
-stemmer = PorterStemmer()
-
-# Function for text preprocessing
+# Function for text preprocessing using spaCy
 def text_preprocessing(text):
+    # Lower case and remove special characters
     text = text.lower()
     text = re.sub('[^a-zA-Z]', ' ', text)
-    text = word_tokenize(text)
-    text = [word for word in text if word not in stop_words]
-    text = [stemmer.stem(word) for word in text]
+    
+    # Process text with spaCy
+    doc = nlp(text)
+    
+    # Lemmatize and remove stopwords
+    text = [token.lemma_ for token in doc if not token.is_stop and token.is_alpha]
+    
+    # Join the cleaned tokens
     text = ' '.join(text)
+    
+    # Transform text using the pre-trained TF-IDF vectorizer
     text = tf.transform([text])
     return text
 
