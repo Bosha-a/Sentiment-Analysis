@@ -47,4 +47,7 @@ if st.button('Predict'):
         prediction = model.predict(processed_text)[0]
         sentiment_dict = {1: 'Positive', 0: 'Negative'}
         sentiment = sentiment_dict[prediction]
-        st.success(f"Sentiment: {sentiment}")
+        if sentiment == 'Positive':
+            st.success(f"Sentiment: {sentiment}")
+        else:
+            st.error(f"Sentiment: {sentiment}")
