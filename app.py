@@ -35,7 +35,7 @@ def text_preprocessing(text):
 # Streamlit app interface
 st.title('Sentiment Analysis Application')
 
-text = st.text_input('Enter your text here:')
+text = st.text_input('Enter your text here')
 
 # Prediction button
 if st.button('Predict'):
